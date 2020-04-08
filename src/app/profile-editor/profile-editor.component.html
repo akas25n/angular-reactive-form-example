@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="col-md-12">
+
+    <p>Form status:
+      {{profileForm.status}}</p>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+      <label>First Name :
+        <input class="form-control" type="text" formControlName="firstName" required>
+      </label>
+      <br>
+      <label>Last Name :
+        <input class="form-control"  type="text" formControlName="lastName">
+      </label>
+      <br>
+      <div formGroupName="address">
+        <h3>Address - </h3>
+
+        <label>
+          Street :
+          <input class="form-control" type="text" formControlName="street">
+        </label>
+        <br>
+        <label>
+          City :
+          <input class="form-control" type="text" formControlName="city">
+        </label>
+        <br>
+        <label>
+          State :
+          <input class="form-control" type="text" formControlName="state">
+        </label>
+        <br>
+        <label>
+          Zip :
+          <input class="form-control" type="text" formControlName="zip">
+        </label>
+
+      </div>
+      <button class="btn btn-primary mr-1" type="submit" [disabled] = "!profileForm.valid"> Submit</button>
+      <button class="btn btn-primary mr-1" type="button" (click)="updateProfile()"> Update Profile</button>
+      <div formArrayName="aliases">
+        <h3>Aliases :</h3>
+        <div *ngFor="let alias of aliases.controls; let i=index">
+        <!--the repeated alias template-->
+        <label>
+          Alias:
+          <input class="form-control" type="text" [formControlName]="i">
+        </label>
+        </div>
+        <button class="btn btn-primary" (click)="addAliases()">Add Allias</button>
+      </div>
+    </form>
+  </div>
+</div>
